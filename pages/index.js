@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import fetch from 'isomorphic-fetch';
 import NewsList from '../components/NewsList';
+import Layout from '../components/Layout';
 
 const Index = ({allpost}) => {
 
@@ -11,9 +12,9 @@ const Index = ({allpost}) => {
     },[]);
     console.log(post);
     return (
-        <div>
+        <Layout title="Hacker News" description="A hacker news clone made with next.js">
             <NewsList post ={post} />
-        </div>
+        </Layout>
     )
 }
 
