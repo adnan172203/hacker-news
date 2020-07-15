@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import fetch from 'isomorphic-fetch';
+import NewsList from '../components/NewsList';
 
 const Index = ({allpost}) => {
 
@@ -8,11 +9,10 @@ const Index = ({allpost}) => {
     useEffect(()=>{
         setPost(allpost);
     },[]);
-
+    console.log(post);
     return (
         <div>
-            <h1>Hello hacker news</h1>
-            { post.map(p => <p key={p.id}>{p.title}</p>) }
+            <NewsList post ={post} />
         </div>
     )
 }
@@ -25,7 +25,7 @@ export async function getStaticProps() {
     const statuscode = res.status > 200 ? res.status : false;
 
 
-    const promises = data.slice(0, 20).map(id => fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(
+    const promises = data.slice(0, 60).map(id => fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(
         response => response.json()
       )
     );
