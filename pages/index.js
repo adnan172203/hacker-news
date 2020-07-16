@@ -1,44 +1,76 @@
-import React, {useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import fetch from 'isomorphic-fetch';
 import NewsList from '../components/NewsList';
 import Layout from '../components/Layout';
 
-const Index = ({allpost}) => {
+const Index = ({ data }) => {
 
-    const [post,setPost] = useState([]);
-    
-    useEffect(()=>{
-        setPost(allpost);
-    },[]);
-    console.log(post);
-    return (
-        <Layout title="Hacker News" description="A hacker news clone made with next.js">
-            <NewsList post ={post} />
-        </Layout>
-    )
+  const [post, setPost] = useState([]);
+  const [page, setPage] = useState(1);
+
+  const getData = async () => {
+    const limit = 30;
+    const start = (page - 1) * limit;
+    const pageData = data.slice(start, start + limit);
+
+    const promiseData = pageData.map(async (item) => {
+      const a = await fetch(
+        `https://hacker-news.firebaseio.com/v0/item/${item}.json`
+      );
+      return await a.json();
+    });
+
+    const newData = await Promise.all(promiseData);
+    console.log(newData);
+    setPost(newData);
+  };
+
+  const handleNext = () => {
+    console.log('next');
+    setPage(page + 1);
+  };
+
+  useEffect(() => {
+    getData();
+  }, [page]);
+
+  return (
+    <Layout
+      title='Hacker News'
+      description='A hacker news clone made with next.js'
+    >
+      <NewsList post={post} />
+      <footer>
+        <button onClick={() => handleNext()}>
+          <a>More</a>
+        </button>
+      </footer>
+    </Layout>
+  );
+};
+
+export async function getServerSideProps({ query }) {
+  const response = await fetch(
+    `https://hacker-news.firebaseio.com//v0/newstories.json?print=pretty`
+  );
+  const data = await response.json();
+  const statuscode = response.status > 200 ? response.status : false;
+
+//   const promises = data
+//     .slice(0, 30)
+//     .map((id) =>
+//       fetch(
+//         `https://hacker-news.firebaseio.com/v0/item/${id}.json`
+//       ).then((response) => response.json())
+//     );
+
+//   const allpost = await Promise.all(promises);
+
+  return {
+    props: {
+      data,
+      statuscode,
+    },
+  };
 }
-
-
-
-export async function getStaticProps() {
-    const res = await fetch('https://hacker-news.firebaseio.com//v0/newstories.json?print=pretty');
-    const data = await res.json();
-    const statuscode = res.status > 200 ? res.status : false;
-
-
-    const promises = data.slice(0, 60).map(id => fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(
-        response => response.json()
-      )
-    );
-  const allpost = await Promise.all(promises);
-
-
-    console.log(allpost);
-    return {
-        props: {
-            allpost,
-            statuscode,
-        },
-    };
-}
-export default Index
+export default Index;
