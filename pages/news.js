@@ -1,7 +1,9 @@
 import Layout from '../components/Layout';
+import CommentList from '../components/CommentList';
+import fetch from 'isomorphic-fetch';
+import React, { useEffect } from 'react';
 
-const News = ({ data }) => {
-  console.log(data);
+const News = ({ data,allcomments }) => {
   return (
     <Layout title={data.title}>
       <main>
@@ -13,38 +15,44 @@ const News = ({ data }) => {
           <strong>{data.descendants} comments</strong>
           <strong>{data.time}</strong>
         </div>
+
+        {data.kids.length > 0 ? (
+          <CommentList comments={allcomments} />
+        ) : (
+          <div>No comments for this story</div>
+        )}
       </main>
 
       <style jsx>{`
-          main {
-            padding: 1em;
-          }
-          .news-title {
-            font-size: 1.2rem;
-            margin: 0;
-            font-weight: 300;
-            padding-bottom: 0.5em;
-          }
-          .news-title a {
-            color: #333;
-            text-decoration: none;
-          }
-          .news-title a:hover {
-            text-decoration: underline;
-          }
-          .news-details {
-            font-size: 0.8rem;
-            padding-bottom: 1em;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            margin-bottom: 1em;
-          }
-          .news-details strong {
-            margin-right: 1em;
-          }
-          .news-details a {
-            color: #f60;
-          }
-        `}</style>
+        main {
+          padding: 1em;
+        }
+        .news-title {
+          font-size: 1.2rem;
+          margin: 0;
+          font-weight: 300;
+          padding-bottom: 0.5em;
+        }
+        .news-title a {
+          color: #333;
+          text-decoration: none;
+        }
+        .news-title a:hover {
+          text-decoration: underline;
+        }
+        .news-details {
+          font-size: 0.8rem;
+          padding-bottom: 1em;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          margin-bottom: 1em;
+        }
+        .news-details strong {
+          margin-right: 1em;
+        }
+        .news-details a {
+          color: #f60;
+        }
+      `}</style>
     </Layout>
   );
 };
@@ -57,9 +65,18 @@ export async function getServerSideProps({ query }) {
   );
   const data = await response.json();
 
+  const promises = data.kids.map((id) =>
+    fetch(
+      `https://hacker-news.firebaseio.com/v0/item/${id}.json`
+    ).then((response) => response.json())
+  );
+
+  const allcomments = await Promise.all(promises);
+
   return {
     props: {
       data,
+      allcomments
     },
   };
 }

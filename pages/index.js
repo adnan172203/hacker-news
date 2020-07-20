@@ -21,12 +21,10 @@ const Index = ({ data }) => {
     });
 
     const newData = await Promise.all(promiseData);
-    console.log(newData);
     setPost(newData);
   };
 
   const handleNext = () => {
-    console.log('next');
     setPage(page + 1);
   };
 
@@ -49,27 +47,14 @@ const Index = ({ data }) => {
   );
 };
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps() {
   const response = await fetch(
     `https://hacker-news.firebaseio.com//v0/newstories.json?print=pretty`
   );
   const data = await response.json();
-  const statuscode = response.status > 200 ? response.status : false;
-
-//   const promises = data
-//     .slice(0, 30)
-//     .map((id) =>
-//       fetch(
-//         `https://hacker-news.firebaseio.com/v0/item/${id}.json`
-//       ).then((response) => response.json())
-//     );
-
-//   const allpost = await Promise.all(promises);
-
   return {
     props: {
-      data,
-      statuscode,
+      data
     },
   };
 }
