@@ -7,13 +7,6 @@ const Comment = ({ comment }) => {
         className='comment-content'
         dangerouslySetInnerHTML={{ __html: comment.text }}
       />
-      {/* {comment.comments && (
-        <div className='nested-comments'>
-          {comment.comments.map((nestedComment) => (
-            <Comment key={nestedComment.id} comment={nestedComment} />
-          ))}
-        </div>
-      )} */}
       <style jsx>{`
         .comment {
           margin-bottom: 1.5em;
@@ -48,5 +41,10 @@ const Comment = ({ comment }) => {
     </div>
   );
 };
+
+// const getStaticProps = async () => {
+
+// }
+
 
 export default Comment;

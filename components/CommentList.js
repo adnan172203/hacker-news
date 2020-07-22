@@ -7,7 +7,6 @@ const CommentList = ({ comments }) => {
       {comments.map((comment) => (
         <Comment key={comment.id} comment={comment} />
       ))}
-      world
     </>
   );
 };

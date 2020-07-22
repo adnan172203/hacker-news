@@ -3,8 +3,8 @@ import Link from 'next/link';
 const NewsList = ({ post }) => {
   return (
     <div className='news-list'>
-      {post.map((p) => (
-        <div className='news' key={p.id}>
+      {  post.map((p) => (
+         <div className='news' key={p.id}>
           <h2 className='news-title'>
             <a href={p.url}>{p.title}</a>
           </h2>

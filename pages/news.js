@@ -1,7 +1,6 @@
 import Layout from '../components/Layout';
 import CommentList from '../components/CommentList';
 import fetch from 'isomorphic-fetch';
-import React, { useEffect } from 'react';
 
 const News = ({ data,allcomments }) => {
   return (
