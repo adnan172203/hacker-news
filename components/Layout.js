@@ -50,6 +50,16 @@ const Layout = ({ children, title, description }) => {
           background: white;
           font-family: Verdana, Geneva, sans-serif;
         }
+
+        button.button {
+          background: none;
+          outline: 0;
+          border: none;
+          margin-left: 10px;
+          color: #828282;
+          font-size: 15px;
+          font-weight: 500;
+      }
       `}</style>
     </div>
   );

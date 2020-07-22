@@ -1,5 +1,4 @@
 const Comment = ({ comment }) => {
-  console.log(comment);
   return (
     <div className='comment'>
       <div className='comment-user'>{comment.by}</div>
@@ -41,10 +40,5 @@ const Comment = ({ comment }) => {
     </div>
   );
 };
-
-// const getStaticProps = async () => {
-
-// }
-
 
 export default Comment;

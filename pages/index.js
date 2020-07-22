@@ -39,7 +39,7 @@ const Index = ({ data }) => {
     >
       <NewsList post={post} />
       <footer>
-        <button onClick={() => handleNext()}>
+        <button className="button" onClick={() => handleNext()}>
           <a>More</a>
         </button>
       </footer>
