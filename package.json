@@ -4,10 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next"
+    "dev": "node server.js",
+    "start": "next start",
+    "build": "next build",
+    "deploy": "now --public"
   },
   "keywords": [],
-  "author": "",
+  "author": "adnan",
   "license": "ISC",
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",

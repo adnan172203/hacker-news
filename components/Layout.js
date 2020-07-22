@@ -59,6 +59,7 @@ const Layout = ({ children, title, description }) => {
           color: #828282;
           font-size: 15px;
           font-weight: 500;
+          cursor:pointer;
       }
       `}</style>
     </div>
