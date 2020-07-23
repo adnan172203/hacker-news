@@ -31,6 +31,11 @@ const Comment = ({ comment }) => {
         dangerouslySetInnerHTML={{ __html: comment.text }}
       />
 
+      <div className="nested-comments">
+        {nestedComment.map(nestedComment => (
+           <p>{nestedComment.text}</p>
+        ))}
+      </div>
 
 
       <style jsx>{`
