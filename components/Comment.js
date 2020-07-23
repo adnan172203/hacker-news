@@ -1,4 +1,28 @@
+import React, { useState, useEffect } from 'react';
+import fetch from 'isomorphic-fetch';
+
 const Comment = ({ comment }) => {
+  const [nestedComment, setComment] = useState([]);
+  const getData = async () => {
+    
+  const promiseData = comment.kids !== undefined ? comment.kids.map(async(item) => {
+
+      const a = await fetch(
+        `https://hacker-news.firebaseio.com/v0/item/${item}.json`
+      );
+      return await a.json();
+    }):'';
+
+   const newData = await Promise.all(promiseData);
+
+   setComment(newData);
+  };
+
+
+  useEffect(()=>{
+    getData();
+  },[]);
+
   return (
     <div className='comment'>
       <div className='comment-user'>{comment.by}</div>
@@ -6,6 +30,9 @@ const Comment = ({ comment }) => {
         className='comment-content'
         dangerouslySetInnerHTML={{ __html: comment.text }}
       />
+
+
+
       <style jsx>{`
         .comment {
           margin-bottom: 1.5em;
@@ -40,5 +67,6 @@ const Comment = ({ comment }) => {
     </div>
   );
 };
+
 
 export default Comment;

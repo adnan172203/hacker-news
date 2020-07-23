@@ -47,7 +47,7 @@ const Index = ({ data }) => {
   );
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const response = await fetch(
     `https://hacker-news.firebaseio.com//v0/newstories.json?print=pretty`
   );
