@@ -33,7 +33,7 @@ const Comment = ({ comment }) => {
 
       <div className="nested-comments">
         {nestedComment.map(nestedComment => (
-           <p>{nestedComment.text}</p>
+           <p key={nestedComment.id}>{nestedComment.text}</p>
         ))}
       </div>
 
