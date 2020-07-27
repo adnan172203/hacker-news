@@ -21,6 +21,8 @@ const NewsList = ({ post }) => {
       <style jsx>{`
         .news-list {
           padding: 0 1em;
+          background: #fff;
+          border-radius: 5px;
         }
         .news {
           padding: 1em 0;

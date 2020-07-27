@@ -9,7 +9,8 @@ const Layout = ({ children, title, description }) => {
         <title>{title}</title>
         <meta name='description' content={description} />
       </Head>
-      <header className='container'>
+      <div className='container'>
+      <header>
         <h1>
           <Link href='/'>
             <a title='Hacker News is a social news website focusing on computer science and entrepreneurship.'>
@@ -19,7 +20,9 @@ const Layout = ({ children, title, description }) => {
         </h1>
       </header>
       <Nav />
-      <div className='container'>{children}</div>
+     
+        {children}
+        </div>
 
       <style jsx>{`
         .container {
@@ -46,7 +49,7 @@ const Layout = ({ children, title, description }) => {
       `}</style>
       <style global jsx>{`
         body {
-          background: white;
+          background: #333;
           font-family: Verdana, Geneva, sans-serif;
         }
 

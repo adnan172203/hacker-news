@@ -37,6 +37,46 @@ const Nav = () => {
           </li>
         </ul>
       </nav>
+      <style jsx>
+        {`
+          nav {
+            font-size: 14px;
+            background-color: #333;
+            padding: 0 10px;
+          }
+          nav ul {
+            margin-left: -41px;
+          }
+          li {
+            display: inline-block;
+          }
+          a {
+            display: block;
+            color: #fff;
+            padding: 10px;
+            text-decoration:none;
+          }
+          a:hover {
+            text-decoration: none;
+            color: #fff;
+            background-color: #111;
+          }
+
+          @media only screen and (max-width: 400px) {
+            nav {
+              font-size: 13px;
+            }
+          }
+          @media only screen and (max-width: 320px) {
+            nav {
+              font-size: 12px;
+            }
+            a {
+              padding: 7px;
+            }
+          }
+        `}
+      </style>
     </>
   );
 };
