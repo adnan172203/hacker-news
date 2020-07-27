@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Head from 'next/head';
+import Nav from './Nav';
 
 const Layout = ({ children, title, description }) => {
   return (
@@ -9,47 +10,39 @@ const Layout = ({ children, title, description }) => {
         <meta name='description' content={description} />
       </Head>
       <header className='container'>
-        <nav>
-          <h1>
-            <Link href='/'>
-              <a title='Hacker News is a social news website focusing on computer science and entrepreneurship.'>
-                <span className='main-title'>Hacker News</span>{' '}
-              </a>
-            </Link>
-          </h1>
-        </nav>
+        <h1>
+          <Link href='/'>
+            <a title='Hacker News is a social news website focusing on computer science and entrepreneurship.'>
+              <span className='main-title'>Hacker News</span>{' '}
+            </a>
+          </Link>
+        </h1>
       </header>
+      <Nav />
       <div className='container'>{children}</div>
 
       <style jsx>{`
         .container {
           max-width: 800px;
           margin: 0 auto;
-          background: #f6f6ef;
         }
-        nav {
-          background: #fc6621;
-        }
-        nav > * {
+
+        header > * {
           display: inline-block;
         }
-        nav a {
+
+        header {
+          background: #fc6621;
+        }
+        header a {
           text-decoration: none;
-        }
-        nav .main-title {
-          font-weight: bold;
-        }
-        nav .back-button {
-          font-size: 0.9rem;
-          padding-right: 1em;
-          cursor: pointer;
         }
 
         h1 .main-title {
           color: #fff;
           font-size: 2rem;
           padding: 1rem;
-      }
+        }
       `}</style>
       <style global jsx>{`
         body {
