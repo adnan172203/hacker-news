@@ -6,18 +6,20 @@ const Layout = ({ children, title, description }) => {
     <div>
       <Head>
         <title>{title}</title>
-        <meta name="description" content={description}/>
+        <meta name='description' content={description} />
       </Head>
-      <div className='container'>
+      <header className='container'>
         <nav>
-          <Link href='/'>
-            <a>
-              <span className='main-title'>Hacker News</span>
-            </a>
-          </Link>
+          <h1>
+            <Link href='/'>
+              <a title='Hacker News is a social news website focusing on computer science and entrepreneurship.'>
+                <span className='main-title'>Hacker News</span>{' '}
+              </a>
+            </Link>
+          </h1>
         </nav>
-        {children}
-      </div>
+      </header>
+      <div className='container'>{children}</div>
 
       <style jsx>{`
         .container {
@@ -26,12 +28,10 @@ const Layout = ({ children, title, description }) => {
           background: #f6f6ef;
         }
         nav {
-          background: #f60;
-          padding: 1em;
+          background: #fc6621;
         }
         nav > * {
           display: inline-block;
-          color: black;
         }
         nav a {
           text-decoration: none;
@@ -44,6 +44,12 @@ const Layout = ({ children, title, description }) => {
           padding-right: 1em;
           cursor: pointer;
         }
+
+        h1 .main-title {
+          color: #fff;
+          font-size: 2rem;
+          padding: 1rem;
+      }
       `}</style>
       <style global jsx>{`
         body {
@@ -59,8 +65,8 @@ const Layout = ({ children, title, description }) => {
           color: #828282;
           font-size: 15px;
           font-weight: 500;
-          cursor:pointer;
-      }
+          cursor: pointer;
+        }
       `}</style>
     </div>
   );
