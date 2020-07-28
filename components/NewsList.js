@@ -29,7 +29,7 @@ const NewsList = ({ post }) => {
         }
         .news-title {
           font-size: 1rem;
-          font-weight: 400;
+          font-weight: 600;
           margin: 0;
           margin-bottom: 0.5em;
         }
@@ -47,9 +47,10 @@ const NewsList = ({ post }) => {
         }
         .news-details span {
           margin-right: 1em;
+          color:#828282
         }
         .news-details a {
-          color: #6600ff;
+          color: #828282;
           text-decoration: none;
         }
 

@@ -38,6 +38,7 @@ const Nav = () => {
             font-size: 14px;
             background-color: #333;
             padding: 0 10px;
+            font-weight: 600;
           }
           nav ul {
             margin-left: -41px;
