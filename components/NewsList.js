@@ -3,7 +3,7 @@ import Link from 'next/link';
 const NewsList = ({ post }) => {
   return (
     <div className='news-list'>
-      {post.map((p) => (
+      {post && post.length > 0 ? post.map((p) => (
         <div className='news' key={p.id}>
           <h2 className='news-title'>
             <a href={p.url}>{p.title}</a>
@@ -16,7 +16,7 @@ const NewsList = ({ post }) => {
             </Link>
           </div>
         </div>
-      ))}
+      )): <p className="no-post">No Post</p> }
 
       <style jsx>{`
         .news-list {
@@ -51,6 +51,11 @@ const NewsList = ({ post }) => {
         .news-details a {
           color: #6600ff;
           text-decoration: none;
+        }
+
+        .no-post{
+          text-align:center;
+          padding:40px;
         }
       `}</style>
     </div>
