@@ -6,28 +6,23 @@ const Nav = () => {
       <nav>
         <ul>
           <li>
-            <Link href='/'>
+            <Link href='/top'>
               <a>Top</a>
             </Link>
           </li>
           <li>
-            <Link href='/best'>
-              <a>Best</a>
-            </Link>
-          </li>
-          <li>
-            <Link href='/newest'>
-              <a>New</a>
-            </Link>
-          </li>
-          <li>
-            <Link href='/show'>
-              <a>ShowHN</a>
+            <Link href='/past'>
+              <a>Past</a>
             </Link>
           </li>
           <li>
             <Link href='/ask'>
-              <a>AskHN</a>
+              <a>ask</a>
+            </Link>
+          </li>
+          <li>
+            <Link href='/show'>
+              <a>Show</a>
             </Link>
           </li>
           <li>
@@ -54,12 +49,13 @@ const Nav = () => {
             display: block;
             color: #fff;
             padding: 10px;
-            text-decoration:none;
+            text-decoration: none;
           }
           a:hover {
             text-decoration: none;
             color: #fff;
             background-color: #111;
+            border-radius:5px;
           }
 
           @media only screen and (max-width: 400px) {
