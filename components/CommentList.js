@@ -1,10 +1,14 @@
 import Comment from '../components/Comment';
 
-const CommentList = ({ comments }) => {
+const CommentList = ({ comments, nestedComments }) => {
   return (
     <>
       {comments.map((comment) => (
-        <Comment key={comment.id} comment={comment} />
+        <Comment
+          key={comment.id}
+          comment={comment}
+          nestedComments={nestedComments}
+        />
       ))}
     </>
   );

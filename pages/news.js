@@ -2,7 +2,7 @@ import Layout from '../components/Layout';
 import CommentList from '../components/CommentList';
 import fetch from 'isomorphic-fetch';
 
-const News = ({ data,allcomments }) => {
+const News = ({ data, allcomments,nestedComments }) => {
   return (
     <Layout title={data.title}>
       <main>
@@ -16,7 +16,7 @@ const News = ({ data,allcomments }) => {
         </div>
 
         {data.kids.length > 0 ? (
-          <CommentList comments={allcomments} />
+          <CommentList comments={allcomments} nestedComments={nestedComments} />
         ) : (
           <div>No comments for this story</div>
         )}
@@ -25,6 +25,7 @@ const News = ({ data,allcomments }) => {
       <style jsx>{`
         main {
           padding: 1em;
+          background: #fff;
         }
         .news-title {
           font-size: 1.2rem;
@@ -64,6 +65,8 @@ export async function getServerSideProps({ query }) {
   );
   const data = await response.json();
 
+  //Fetch all comments
+
   const promises = data.kids.map((id) =>
     fetch(
       `https://hacker-news.firebaseio.com/v0/item/${id}.json`
@@ -72,10 +75,29 @@ export async function getServerSideProps({ query }) {
 
   const allcomments = await Promise.all(promises);
 
+  //Fetching nested comments
+
+  const nComments = allcomments.map(async(comment) => {
+
+    const nkids = comment.kids !== undefined ? comment.kids.map(async (item) => {
+          const a = await fetch(
+            `https://hacker-news.firebaseio.com/v0/item/${item}.json`
+          );
+          return await a.json();
+        })
+      : '';
+      const best = await Promise.all(nkids);
+      return best;
+  });
+
+  const nestedComments = await Promise.all(nComments);
+
+
   return {
     props: {
       data,
-      allcomments
+      allcomments,
+      nestedComments
     },
   };
 }

@@ -23,7 +23,7 @@ const Index = ({ data }) => {
     const newData = await Promise.all(promiseData);
     setPost(newData);
   };
-  console.log(post);
+
   const handleNext = () => {
     setPage(page + 1);
   };

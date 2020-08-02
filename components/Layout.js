@@ -10,19 +10,19 @@ const Layout = ({ children, title, description }) => {
         <meta name='description' content={description} />
       </Head>
       <div className='container'>
-      <header>
-        <h1>
-          <Link href='/'>
-            <a title='Hacker News is a social news website focusing on computer science and entrepreneurship.'>
-              <span className='main-title'>Hacker News</span>{' '}
-            </a>
-          </Link>
-        </h1>
-      </header>
-      <Nav />
-     
+        <header>
+          <h1>
+            <Link href='/'>
+              <a title='Hacker News is a social news website focusing on computer science and entrepreneurship.'>
+                <span className='main-title'>Hacker News</span>{' '}
+              </a>
+            </Link>
+          </h1>
+        </header>
+        <Nav />
+
         {children}
-        </div>
+      </div>
 
       <style jsx>{`
         .container {
@@ -54,7 +54,7 @@ const Layout = ({ children, title, description }) => {
         }
 
         button.button {
-          background: none;
+          background:none;
           outline: 0;
           border: none;
           margin-left: 10px;
@@ -62,6 +62,13 @@ const Layout = ({ children, title, description }) => {
           font-size: 15px;
           font-weight: 500;
           cursor: pointer;
+        }
+
+        footer {
+          background: #eee;
+          display:block;
+          padding:1rem;
+          border-radius: 0 0 5px 5px;
         }
       `}</style>
     </div>

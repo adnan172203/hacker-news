@@ -22,7 +22,7 @@ const NewsList = ({ post }) => {
         .news-list {
           padding: 0 1em;
           background: #fff;
-          border-radius: 5px;
+          border-radius: 5px 5px 0 0
         }
         .news {
           padding: 1em 0;
