@@ -15,7 +15,7 @@ const News = ({ data, allcomments,nestedComments }) => {
           <strong>{data.time}</strong>
         </div>
 
-        {data.kids.length > 0 ? (
+        {data.kids && data.kids.length > 0 ? (
           <CommentList comments={allcomments} nestedComments={nestedComments} />
         ) : (
           <div>No comments for this story</div>
@@ -67,11 +67,11 @@ export async function getServerSideProps({ query }) {
 
   //Fetch all comments
 
-  const promises = data.kids.map((id) =>
+  const promises = data.kids !== undefined ? data.kids.map((id) =>
     fetch(
       `https://hacker-news.firebaseio.com/v0/item/${id}.json`
     ).then((response) => response.json())
-  );
+  ):'';
 
   const allcomments = await Promise.all(promises);
 
