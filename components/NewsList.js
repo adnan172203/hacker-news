@@ -4,6 +4,7 @@ const NewsList = ({ post }) => {
   return (
     <div className='news-list'>
       {post && post.length > 0 ? post.map((p) => (
+        p !== null ?
         <div className='news' key={p.id}>
           <h2 className='news-title'>
             <a href={p.url}>{p.title}</a>
@@ -15,7 +16,7 @@ const NewsList = ({ post }) => {
               <a>{p.descendants} comments</a>
             </Link>
           </div>
-        </div>
+        </div> : ''
       )): <p className="no-post">No Post</p> }
 
       <style jsx>{`

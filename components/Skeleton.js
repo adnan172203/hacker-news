@@ -9,7 +9,7 @@ const Skeletons = () => {
           .fill()
           .map((item, index) => (
             <li key={index}>
-              <Skeleton />
+              <Skeleton/>
               <p className='card-channel'>
                 <span>
                   {' '}
