@@ -1,9 +1,8 @@
-import Skeleton,{ SkeletonTheme }from 'react-loading-skeleton';
+import Skeleton from 'react-loading-skeleton';
 
 const Skeletons = () => {
   return (
     <section className="skeleton-bg">
-        <SkeletonTheme >
       <ul className='list'>
         {Array(10)
           .fill()
@@ -22,7 +21,6 @@ const Skeletons = () => {
             </li>
           ))}
       </ul>
-      </SkeletonTheme>
       <style jsx>{`
         .skeleton-bg{
             background:#fff;

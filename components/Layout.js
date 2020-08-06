@@ -70,6 +70,11 @@ const Layout = ({ children, title, description }) => {
           padding:1rem;
           border-radius: 0 0 5px 5px;
         }
+
+        footer a{
+          text-decoration:none;
+          color:#6f6f6f;
+        }
       `}</style>
     </div>
   );

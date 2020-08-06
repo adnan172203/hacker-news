@@ -62,8 +62,8 @@ export async function getServerSideProps({query}) {
   return {
     props: {
       data,
-      newData,
-      page
+      page,
+      newData
     },
   };
 }
