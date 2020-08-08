@@ -1,40 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import fetch from 'isomorphic-fetch';
+import Link from 'next/link';
 import NewsList from '../components/NewsList';
 import Layout from '../components/Layout';
-import Skeletons from '../components/Skeleton'; 
+import Skeletons from '../components/Skeleton';
 
-const Index = ({ data }) => {
-
+const Index = ({ newData, page }) => {
   const [post, setPost] = useState([]);
-  const [page, setPage] = useState(1);
   const [isLoading, setLoading] = useState(true);
 
-  const getData = async () => {
-    const limit = 30;
-    const start = (page - 1) * limit;
-    const pageData = data.slice(start, start + limit);
-
-    const promiseData = pageData.map(async (item) => {
-      const a = await fetch(
-        `https://hacker-news.firebaseio.com/v0/item/${item}.json`
-      );
-      return await a.json();
-    });
-
-    const newData = await Promise.all(promiseData);
-    setLoading(false);
-    setPost(newData);
-  };
-
-  const handleNext = () => {
-    setPage(page + 1);
-  };
-
   useEffect(() => {
-    setLoading(true);
-    getData();
-  }, [page]);
+    setPost(newData);
+    setLoading(false);
+  });
 
   return (
     <Layout
@@ -43,22 +21,42 @@ const Index = ({ data }) => {
     >
       {isLoading ? <Skeletons /> : <NewsList post={post} />}
       <footer>
-        <button className="button" onClick={() => handleNext()}>
+      <Link href={`/?page=${page + 1}`}>
           <a>More</a>
-        </button>
+        </Link>
       </footer>
     </Layout>
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps({ query }) {
+  
+  //fetch asktories id
   const response = await fetch(
     `https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty`
   );
   const data = await response.json();
+
+  //fetch asktories through filtering
+
+  let page = Number(query.page) || 1;
+  const limit = 30;
+  const start = (page - 1) * limit;
+  const pageData = data.slice(start, start + limit);
+
+  const promiseData = pageData.map(async (item) => {
+    const a = await fetch(
+      `https://hacker-news.firebaseio.com/v0/item/${item}.json`
+    );
+    return await a.json();
+  });
+
+  const newData = await Promise.all(promiseData);
   return {
     props: {
-      data
+      data,
+      page,
+      newData,
     },
   };
 }
