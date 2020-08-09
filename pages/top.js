@@ -30,6 +30,8 @@ const Index = ({ newData, page }) => {
 };
 
 export async function getServerSideProps({ query }) {
+  
+  //fetch topstories id
   const response = await fetch(
     `https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty`
   );
