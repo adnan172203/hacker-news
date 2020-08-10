@@ -7,11 +7,12 @@ const Comment = ({ comment, nestedComments }) => {
         dangerouslySetInnerHTML={{ __html: comment.text }}
       />
 
-      <div className='nested-comments'>
+
+      <div className='nested-comments'  >
         {nestedComments &&
           nestedComments.map((nestedComment) => {
             return nestedComment.map((comment) => (
-              <p key={comment.id}>{comment.text}</p>
+              <p key={comment.id} dangerouslySetInnerHTML={{ __html: comment.text }}/>
             ));
           })}
       </div>
